@@ -35,6 +35,8 @@ public class mapa {
     p - plot
     o - zombie w wodzie
     l - czlowiek w wodzie
+    m - zombie i bron
+    i - czlowiek i bron
      */
     public void losuj_mape() {
         Point koor = new Point();

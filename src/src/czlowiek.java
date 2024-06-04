@@ -11,9 +11,31 @@ public class czlowiek extends src.postac {
     boolean czy_zarazony;
     int tury_do_zarazenia;
     bron bron;
-    public int logika_czlowieka(){
-        return 1;
+    /*
+    Logika zombie:
+    1. Jesli masz bron atakuj zombie
+    2. Jesli nie masz broni uciekaj przed zombie
+    3. Jesli nie masz broni i nie ma zombie w okolicy i znajduje sie bron idz po bron
+    4. Jesli masz bron i nie ma zombie  poruszaj sie w losowym kierunku (jesli napotkasz plot na drodze zniszcz, jesli napotkasz bron to sprawdz czy lepsza, jesli tak to wez)
+    5. Zabito człowieka
+    6. Zniszczono plot
+     */
+    public int logika_czlowieka(mapa mapa){
+        Point cel_ruchu = null;
+        for(int i=0; i<mapa.tab_z.size(); i++){
+
+        }
     }
+
+
+
+
+
+
+
+
+
+    // Konstruktory, gettery i settery
     public czlowiek(Point koor){
         super(koor, 10, 2);
         Random rand = new Random();

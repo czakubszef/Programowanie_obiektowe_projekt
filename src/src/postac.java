@@ -6,6 +6,7 @@ public class postac {
     public int zdrowie;
     public int podstawowe_obrazenia;
     public Point koordynaty;
+    public int tury_spowolnienia;
 
     public int atakuj_plot(Point koor, mapa mapa){
         plot cel = null;
@@ -28,6 +29,7 @@ public class postac {
         this.zdrowie = zdrow;
         this.podstawowe_obrazenia = dmg;
         this.koordynaty = koor;
+        this.tury_spowolnienia=0;
     }
 
     public int getZdrowie() {
