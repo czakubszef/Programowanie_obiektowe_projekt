@@ -32,7 +32,7 @@ public class zombie extends src.postac {
             }
             if(this.koordynaty.distance(czlowiek.getKoordynaty())<=5){
                 idz_do_czlowieka = true;
-                cel_ruchu.setLocation(czlowiek.koordynaty);
+                cel_ruchu.setLocation(jaki_ruch(this.koordynaty, czlowiek.koordynaty));
             }
         }
         if(idz_do_czlowieka && czy_plot(cel_ruchu, mapa)){
@@ -86,13 +86,16 @@ public class zombie extends src.postac {
         else{
             mapa.map[koor.y][koor.x] = 'z';
         }
-        this.koordynaty.equals(koor);
+        this.koordynaty = koor;
     }
     public int atakuj_czlowieka(czlowiek cel, mapa mapa){
         cel.zdrowie= cel.zdrowie-this.podstawowe_obrazenia;
         if(cel.zdrowie<=0){
             if(mapa.map[cel.koordynaty.y][cel.koordynaty.x]=='l'){
                 mapa.map[cel.koordynaty.y][cel.koordynaty.x]='w';
+            }
+            else if(mapa.map[cel.koordynaty.y][cel.koordynaty.x]=='i'){
+                mapa.map[cel.koordynaty.y][cel.koordynaty.x]='b';
             }
             else{
                 mapa.map[cel.koordynaty.y][cel.koordynaty.x]=' ';
@@ -101,32 +104,6 @@ public class zombie extends src.postac {
             return 2;
         }
         return 1;
-    }
-    private Point losowy_ruch(Point punkt, int rozmiar_mapy){
-        Random rand = new Random();
-        int x = rand.nextInt(3)-1;
-        int y = rand.nextInt(3)-1;
-        if(punkt.x+x>rozmiar_mapy || punkt.x+x<0){
-            x=x*-1;
-        }
-        if(punkt.y+y>rozmiar_mapy || punkt.y+y<0){
-            y=y*-1;
-        }
-        return new Point(punkt.x+x, punkt.y+y);
-    }
-    private Point jaki_ruch(Point start, Point cel){
-        int kierunek_x = Integer.signum(cel.x - start.x);
-        int kierunek_y = Integer.signum(cel.y - start.y);
-        return new Point(start.x+kierunek_x, start.y+kierunek_y);
-    }
-    private boolean czy_plot(Point punkt, mapa mapa){
-        for(int i=0; i<mapa.tab_pl.size(); i++){
-            plot plot = mapa.tab_pl.get(i);
-            if(plot.koordynaty.equals(punkt)){
-                return true;
-            }
-        }
-        return false;
     }
     public zombie(Point koordynaty) {
         super(koordynaty, 5, 2);

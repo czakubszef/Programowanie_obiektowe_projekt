@@ -1,6 +1,7 @@
 package src;
 
 import java.awt.*;
+import java.util.Random;
 
 public class postac {
     public int zdrowie;
@@ -24,6 +25,39 @@ public class postac {
         }
         return 1;
     }
+    public Point losowy_ruch(Point punkt, int rozmiar_mapy){
+        Random rand = new Random();
+        int x = rand.nextInt(3)-1;
+        int y = rand.nextInt(3)-1;
+        if(punkt.x+x>rozmiar_mapy || punkt.x+x<0){
+            x=x*-1;
+        }
+        if(punkt.y+y>rozmiar_mapy || punkt.y+y<0){
+            y=y*-1;
+        }
+        return new Point(punkt.x+x, punkt.y+y);
+    }
+    public Point jaki_ruch(Point start, Point cel){
+        int kierunek_x = Integer.signum(cel.x - start.x);
+        int kierunek_y = Integer.signum(cel.y - start.y);
+        return new Point(start.x+kierunek_x, start.y+kierunek_y);
+    }
+    public boolean czy_plot(Point punkt, mapa mapa){
+        for(int i=0; i<mapa.tab_pl.size(); i++){
+            plot plot = mapa.tab_pl.get(i);
+            if(plot.koordynaty.equals(punkt)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
+
 
     public postac(Point koor, int zdrow, int dmg) {
         this.zdrowie = zdrow;
