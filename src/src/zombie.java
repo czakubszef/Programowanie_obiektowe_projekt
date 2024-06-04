@@ -10,6 +10,8 @@ public class zombie extends src.postac {
     2. Idź do człowieka
     3. Idź w losowym kierunku (jeśli nie może to w inny)
     4. Jeśli nie ma innego wyboru to oznacza, że otaczają go płoty, więc zniszcz jeden.
+    5. Zabito człowieka
+    6. Zniszczono plot
      */
     public int logika_zombie(mapa mapa) {
         boolean idz_do_czlowieka = false;
@@ -19,7 +21,14 @@ public class zombie extends src.postac {
         for(int i = 0; i<=mapa.tab_cz.size(); i++){
             czlowiek czlowiek = mapa.tab_cz.get(i);
             if(this.koordynaty.distance(czlowiek.getKoordynaty())<=1.4){
-                return 1;
+                cel_ataku.setLocation(czlowiek.koordynaty);
+                int p = atakuj_czlowieka(czlowiek, mapa);
+                if(p == 1){
+                    return 1;
+                }
+                else{
+                    return 5;
+                }
             }
             if(this.koordynaty.distance(czlowiek.getKoordynaty())<=4){
                 idz_do_czlowieka = true;
@@ -27,7 +36,10 @@ public class zombie extends src.postac {
             }
         }
         if(idz_do_czlowieka && czy_plot(cel_ruchu, mapa)){
-            //zaatakuj plot
+            int p = atakuj_plot(cel_ruchu, mapa);
+            if(p==2){
+                return 6;
+            }
             return 4;
         }
         else if(idz_do_czlowieka){
@@ -36,13 +48,30 @@ public class zombie extends src.postac {
         }
         cel_ruchu.setLocation(losowy_ruch(this.koordynaty, mapa.rozmiar));
         if(czy_plot(cel_ruchu, mapa)){
-            //zaatakuj plot
+            int p = atakuj_plot(cel_ruchu, mapa);
+            if(p==2){
+                return 6;
+            }
             return 4;
         }
         else{
             //idz do punktu
             return 3;
         }
+    }
+    public int atakuj_czlowieka(czlowiek cel, mapa mapa){
+        cel.zdrowie= cel.zdrowie-this.podstawowe_obrazenia;
+        if(cel.zdrowie<=0){
+            if(mapa.map[cel.koordynaty.y][cel.koordynaty.x]=='l'){
+                mapa.map[cel.koordynaty.y][cel.koordynaty.x]='w';
+            }
+            else{
+                mapa.map[cel.koordynaty.y][cel.koordynaty.x]=' ';
+            }
+            mapa.tab_cz.remove(cel);
+            return 2;
+        }
+        return 1;
     }
     private Point losowy_ruch(Point punkt, int rozmiar_mapy){
         Random rand = new Random();
@@ -71,6 +100,6 @@ public class zombie extends src.postac {
         return false;
     }
     public zombie(Point koordynaty) {
-        super(koordynaty, 5, 1, 2);
+        super(koordynaty, 5, 2);
     }
 }

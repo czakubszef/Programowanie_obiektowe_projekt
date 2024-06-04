@@ -15,7 +15,7 @@ public class czlowiek extends src.postac {
         return 1;
     }
     public czlowiek(Point koor){
-        super(koor, 10, 1, 2);
+        super(koor, 10, 2);
         Random rand = new Random();
         int random = rand.nextInt(10);
         if(random <=2){

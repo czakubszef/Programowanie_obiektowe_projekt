@@ -51,18 +51,18 @@ public class mapa {
                         koor.setLocation(j, i);
                         woda woda = new woda(koor);
                         tab_w.add(woda);
-                        map[j][i] = 'w';
+                        map[i][j] = 'w';
                     } else {
                         koor.setLocation(j, i);
                         if (random_bron <= 1) {
                             bron bron = new bron(koor, true);
                             tab_br.add(bron);
-                            map[j][i]='b';
+                            map[i][j]='b';
                             trawa trawa = new trawa(koor, 3);
                             tab_t.add(trawa);
                         }
                         else{
-                            map[j][i]=' ';
+                            map[i][j]=' ';
                             trawa trawa = new trawa(koor, 0);
                             tab_t.add(trawa);
                         };
@@ -72,7 +72,7 @@ public class mapa {
                     if(random_zombie_czlowiek <= 5){
                         zombie zombie = new zombie(koor);
                         tab_z.add(zombie);
-                        map[j][i]='z';
+                        map[i][j]='z';
                         trawa trawa = new trawa(koor,2);
                         tab_t.add(trawa);
                     }
@@ -84,7 +84,7 @@ public class mapa {
                             tab_br.add(bron);
                         }
                         tab_cz.add(czlowiek);
-                        map[j][i] = 'c';
+                        map[i][j] = 'c';
                         trawa trawa = new trawa(koor,1);
                         tab_t.add(trawa);
                     }
@@ -93,7 +93,7 @@ public class mapa {
                     koor.setLocation(j,i);
                     plot plot = new plot(koor);
                     tab_pl.add(plot);
-                    map[j][i]='p';
+                    map[i][j]='p';
                     trawa trawa = new trawa(koor, 4);
                     tab_t.add(trawa);
                 }

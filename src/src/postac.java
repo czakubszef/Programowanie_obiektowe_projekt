@@ -4,20 +4,28 @@ import java.awt.*;
 
 public class postac {
     public int zdrowie;
-    public int ruch_na_ture;
     public int podstawowe_obrazenia;
     public Point koordynaty;
 
-    public void atak() {
+    public int atakuj_plot(Point koor, mapa mapa){
+        plot cel = null;
+        for(int i=0; i<mapa.tab_pl.size(); i++){
+            cel = mapa.tab_pl.get(i);
+            if(cel.koordynaty.equals(koor)){
+                break;
+            }
+        }
+        cel.zdrowie = cel.zdrowie-this.podstawowe_obrazenia;
+        if(cel.zdrowie<=0){
+            mapa.map[cel.koordynaty.y][cel.koordynaty.x] = ' ';
+            mapa.tab_pl.remove(cel);
+            return 2;
+        }
+        return 1;
     }
 
-    public void ruch() {
-
-    }
-
-    public postac(Point koor, int zdrow, int ruch, int dmg) {
+    public postac(Point koor, int zdrow, int dmg) {
         this.zdrowie = zdrow;
-        this.ruch_na_ture = ruch;
         this.podstawowe_obrazenia = dmg;
         this.koordynaty = koor;
     }
@@ -28,14 +36,6 @@ public class postac {
 
     public void setZdrowie(int zdrowie) {
         this.zdrowie = zdrowie;
-    }
-
-    public int getRuch_na_ture() {
-        return ruch_na_ture;
-    }
-
-    public void setRuch_na_ture(int ruch_na_ture) {
-        this.ruch_na_ture = ruch_na_ture;
     }
 
     public int getPodstawowe_obrazenia() {
