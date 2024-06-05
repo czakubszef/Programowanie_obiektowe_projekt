@@ -8,8 +8,6 @@ public class czlowiek extends src.postac {
     1 - bron
      */
     int czy_uzbrojony;
-    boolean czy_zarazony;
-    int tury_do_zarazenia;
     bron bron;
     /*
     Logika czlowieka:
@@ -163,7 +161,7 @@ public class czlowiek extends src.postac {
     private boolean czy_lepsza_bron(Point koor, mapa mapa){
         double br_1 = (this.bron.obrazenia+this.bron.zasieg+this.bron.wytrzymalosc)/3;
         bron br = null;
-        double br_2;
+        double br_2 = 0;
         for(int i=0; i<=mapa.tab_br.size(); i++){
             br = mapa.tab_br.get(i);
             if(br.koordynaty.equals(koor) && br != this.bron){
@@ -235,8 +233,6 @@ public class czlowiek extends src.postac {
         }
         random = rand.nextInt(5);
         this.czy_uzbrojony = random+1;
-        this.czy_zarazony=false;
-        this.tury_do_zarazenia=3;
     }
 
 
@@ -248,21 +244,6 @@ public class czlowiek extends src.postac {
         this.czy_uzbrojony = bron;
     }
 
-    public boolean isCzy_zarazony() {
-        return czy_zarazony;
-    }
-
-    public void setCzy_zarazony(boolean czy_zarazony) {
-        this.czy_zarazony = czy_zarazony;
-    }
-
-    public int getTury_do_zarazenia() {
-        return tury_do_zarazenia;
-    }
-
-    public void setTury_do_zarazenia(int tury_do_zarazenia) {
-        this.tury_do_zarazenia = tury_do_zarazenia;
-    }
 
     public src.bron getBron() {
         return bron;

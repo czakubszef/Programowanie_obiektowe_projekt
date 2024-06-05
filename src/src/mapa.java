@@ -102,6 +102,12 @@ public class mapa {
             }
         }
     }
+    //metoda swtorz mape dla trybu 2
+
+
+
+
+
 
     public int getRozmiar() {
         return rozmiar;
