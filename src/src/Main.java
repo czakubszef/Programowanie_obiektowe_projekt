@@ -8,24 +8,18 @@ import java.util.Scanner;
 public class Main {
     static int menu_number;
     public static void main(String[] args) {
-        mapa mapa = new mapa();
-        mapa.losuj_mape();
-        int rozmiar = mapa.getRozmiar();
-        for(int i=0; i<rozmiar; i++){
-            for (int j=0; j<rozmiar; j++){
-                System.out.print(mapa.map[i][j]);
-                System.out.print(' ');
-            }
-            System.out.println();
-        }
+        Main main = new Main();
+        main.main_menu();
     }
-    public static void main_menu(){
-        System.out.println("Menu\n\n1. Losowy\n2. Kreator symulacji\n3. Wyjscie  Prosze wybrac odpowiednia opcje wpisujac odpowiadajacy jej numer: ");
+    public void main_menu(){
+        System.out.println("Menu\n\n1. Losowy\n2. Kreator symulacji\n3. Wyjscie\nProsze wybrac odpowiednia opcje wpisujac odpowiadajacy jej numer: ");
         Scanner usr_input = new Scanner(System.in);
         while(true){
             menu_number = usr_input.nextInt();
             if(menu_number == 1){
-
+                mapa mapa= new mapa();
+                mapa.losuj_mape();
+                this.symulacja(mapa);
             }
             else if(menu_number == 2){
 
@@ -41,6 +35,7 @@ public class Main {
     //zwraca 1 jesli wygrali ludzie, 0 jesli wygrali zombie
     public int symulacja(mapa mapa){
         while(true){
+            cli(mapa);
             for(int i=0; i<=mapa.tab_cz.size(); i++){
                 czlowiek czlowiek = mapa.tab_cz.get(i);
                 //logika czlowieka + efekty returnow (jakies komunikaty czy cos) !!!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZAPOMNIJ O EFEKCIE WODY
@@ -106,9 +101,11 @@ public class Main {
                 }
             }
             if(mapa.tab_z.isEmpty()){
+                cli(mapa);
                 return 1;
             }
             else if(mapa.tab_cz.isEmpty()){
+                cli(mapa);
                 return 0;
             }
         }
@@ -131,7 +128,7 @@ public class Main {
         for(int i=0; i< mapa.rozmiar; i++){
             System.out.print("--");
         }
-        System.out.print("\n\nLiczba ludzi na mapie: " + mapa.tab_cz.size()+"\n\nLiczba zombie na mapie: " + mapa.tab_z.size() + "Proszę wcisnąć d aby udać się do dziennika zdarzeń lub ENTER aby przejść do nasępnej tury");
+        System.out.print("\n\nLiczba ludzi na mapie: " + mapa.tab_cz.size()+"\n\nLiczba zombie na mapie: " + mapa.tab_z.size() + "\nProszę wcisnąć d aby udać się do dziennika zdarzeń lub ENTER aby przejść do nasępnej tury");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if ("d".equalsIgnoreCase(input)) {
