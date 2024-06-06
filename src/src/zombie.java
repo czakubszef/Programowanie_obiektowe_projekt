@@ -18,9 +18,9 @@ public class zombie extends src.postac {
         Point cel_ataku = new Point();
         Point cel_ruchu = new Point();
 
-        for(int i = 0; i<=mapa.tab_cz.size(); i++){
+        for(int i = 0; i<mapa.tab_cz.size(); i++){
             czlowiek czlowiek = mapa.tab_cz.get(i);
-            if(this.koordynaty.distance(czlowiek.getKoordynaty())<=1.4){
+            if(this.koordynaty.distance(czlowiek.getKoordynaty())<=1){
                 cel_ataku.setLocation(czlowiek.koordynaty);
                 int p = atakuj_czlowieka(czlowiek, mapa);
                 if(p == 1){
@@ -66,11 +66,14 @@ public class zombie extends src.postac {
         else if(mapa.map[this.koordynaty.y][this.koordynaty.x] == 'm'){
             mapa.map[this.koordynaty.y][this.koordynaty.x] = 'b';
         }
+        else if(mapa.map[this.koordynaty.y][this.koordynaty.x] == 'e'){
+            mapa.map[this.koordynaty.y][this.koordynaty.x] = 'z';
+        }
         else{
             mapa.map[this.koordynaty.y][this.koordynaty.x] = ' ';
         }
         if(mapa.map[koor.y][koor.x] == 'w'){
-            woda wod = null;
+            woda wod = new woda(koor);
             for(int i=0; i<mapa.tab_w.size(); i++){
                 wod = mapa.tab_w.get(i);
                 if(wod.koordynaty.equals(koor)){
@@ -83,10 +86,13 @@ public class zombie extends src.postac {
         else if(mapa.map[koor.y][koor.x] == 'b'){
             mapa.map[koor.y][koor.x] = 'm';
         }
+        else if(mapa.map[koor.y][koor.x] == 'z'){
+            mapa.map[koor.y][koor.x] = 'e';
+        }
         else{
             mapa.map[koor.y][koor.x] = 'z';
         }
-        this.koordynaty = koor;
+        this.koordynaty.setLocation(koor);
     }
     public int atakuj_czlowieka(czlowiek cel, mapa mapa){
         cel.zdrowie= cel.zdrowie-this.podstawowe_obrazenia;
@@ -105,7 +111,13 @@ public class zombie extends src.postac {
         }
         return 1;
     }
+
+
+    public zombie(Point koordynaty, int zdrowie, int dmg){
+        super(koordynaty,zdrowie, dmg);
+    }
     public zombie(Point koordynaty) {
         super(koordynaty, 5, 2);
     }
+
 }

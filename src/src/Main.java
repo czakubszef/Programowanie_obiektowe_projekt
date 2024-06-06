@@ -12,9 +12,9 @@ public class Main {
         main.main_menu();
     }
     public void main_menu(){
-        System.out.println("Menu\n\n1. Losowy\n2. Kreator symulacji\n3. Wyjscie\nProsze wybrac odpowiednia opcje wpisujac odpowiadajacy jej numer: ");
         Scanner usr_input = new Scanner(System.in);
         while(true){
+            System.out.println("Menu\n\n1. Losowy\n2. Kreator symulacji\n3. Wyjscie\nProsze wybrac odpowiednia opcje wpisujac odpowiadajacy jej numer: ");
             menu_number = usr_input.nextInt();
             if(menu_number == 1){
                 mapa mapa= new mapa();
@@ -36,7 +36,7 @@ public class Main {
     public int symulacja(mapa mapa){
         while(true){
             cli(mapa);
-            for(int i=0; i<=mapa.tab_cz.size(); i++){
+            for(int i=0; i<mapa.tab_cz.size(); i++){
                 czlowiek czlowiek = mapa.tab_cz.get(i);
                 //logika czlowieka + efekty returnow (jakies komunikaty czy cos) !!!!!!!!!!!!!!!!!!!!!!!!!!!!! NIE ZAPOMNIJ O EFEKCIE WODY
                 if(czlowiek.tury_spowolnienia>0){
@@ -46,32 +46,32 @@ public class Main {
                 int p=czlowiek.logika_czlowieka(mapa);
                 switch (p){
                     case 1:
-                        //komunikat czlowiek zaatakowal zombie
+                        System.out.println("komunikat czlowiek zaatakowal zombie");
                         break;
                     case 2:
-                        //komunikat czlowiek ucieka przed zombie
+                        System.out.println("komunikat czlowiek ucieka przed zombie");
                         break;
                     case 3:
-                        //komunikat czlowiek poszedl po bron
+                        System.out.println("komunikat czlowiek ucieka przed zombie");
                         break;
                     case 4:
-                        //komunikat czlowiek wykonal losowy ruch
+                        System.out.println("komunikat czlowiek wykonal losowy ruch");
                         break;
                     case 5:
-                        //komunikat czlowiek zabil zombie
+                        System.out.println("komunikat czlowiek zabil zombie");
                         break;
                     case 6:
-                        //komunikat czlowiek zniszczyl plot
+                        System.out.println("komunikat czlowiek zniszczyl plot");
                         break;
                     case 7:
-                        //komunikat czlowiek poszedl do zombie
+                        System.out.println("komunikat czlowiek poszedl do zombie");
                         break;
                     case 8:
-                        //komunikat czlowiek zaatakowal plot
+                        System.out.println("/komunikat czlowiek zaatakowal plot");
                         break;
                 }
             }
-            for(int i=0; i<=mapa.tab_z.size(); i++){
+            for(int i=0; i<mapa.tab_z.size(); i++){
                 //logika zombie + efekty returnow (jakies komunikaty czy cos)
                 zombie zombie = mapa.tab_z.get(i);
                 if(zombie.tury_spowolnienia>0){
@@ -81,22 +81,22 @@ public class Main {
                 int p = zombie.logika_zombie(mapa);
                 switch (p){
                     case 1:
-                        //komunikat zombie zaatakował człowieka
+                        System.out.println("komunikat zombie zaatakował człowieka");
                         break;
                     case 2:
-                        //komunikat zombie podszedł do człowieka
+                        System.out.println("komunikat zombie podszedł do człowieka");
                         break;
                     case 3:
-                        //komunikat zombie poszedl w losowym kierunku
+                        System.out.println("komunikat zombie poszedl w losowym kierunku");
                         break;
                     case 4:
-                        //komunikat zombie atakuje plot
+                        System.out.println("komunikat zombie atakuje plot");
                         break;
                     case 5:
-                        //komunikat zombie zabil czlowieka
+                        System.out.println("komunikat zombie zabil czlowieka");
                         break;
                     case 6:
-                        //komunikat zombie zniszczyl plot
+                        System.out.println("komunikat zombie zniszczyl plot");
                         break;
                 }
             }
@@ -117,18 +117,21 @@ public class Main {
         for(int i=0; i< mapa.rozmiar; i++){
             System.out.print("--");
         }
-        System.out.print("\n|");
-        for(int i=0; i<mapa.rozmiar; i++){
-            for(int j=0; j<mapa.rozmiar; j++){
-                System.out.print(mapa.map[i][j]+'|');
+        System.out.print("\n");
+        for(int i=0; i<mapa.rozmiar; i++) {
+            for (int j = 0; j < mapa.rozmiar; j++) {
+                System.out.print('|');
+                System.out.print(mapa.map[i][j]);
+                System.out.print('|');
             }
-            System.out.print("\n|");
+            System.out.print("\n");
+            System.out.print('-');
+            for (int j = 0; j < mapa.rozmiar; j++) {
+                System.out.print("--");
+            }
+            System.out.print("\n");
         }
-        System.out.print('-');
-        for(int i=0; i< mapa.rozmiar; i++){
-            System.out.print("--");
-        }
-        System.out.print("\n\nLiczba ludzi na mapie: " + mapa.tab_cz.size()+"\n\nLiczba zombie na mapie: " + mapa.tab_z.size() + "\nProszę wcisnąć d aby udać się do dziennika zdarzeń lub ENTER aby przejść do nasępnej tury");
+        System.out.print("\n\nLiczba ludzi na mapie: " + mapa.tab_cz.size()+"\n\nLiczba zombie na mapie: " + mapa.tab_z.size() + "\n\nProszę wcisnąć d aby udać się do dziennika zdarzeń lub ENTER aby przejść do nasępnej tury");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if ("d".equalsIgnoreCase(input)) {

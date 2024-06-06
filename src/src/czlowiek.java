@@ -21,8 +21,8 @@ public class czlowiek extends src.postac {
     8. atakuj plot
      */
     public int logika_czlowieka(mapa mapa){
-        Point cel_ruchu = null;
-        for(int i=0; i<=mapa.tab_z.size(); i++){
+        Point cel_ruchu = new Point();
+        for(int i=0; i<mapa.tab_z.size(); i++){
             zombie zom = mapa.tab_z.get(i);
             if(zom.koordynaty.distance(this.koordynaty)<=5){
                 if(this.czy_uzbrojony==1){
@@ -67,10 +67,10 @@ public class czlowiek extends src.postac {
                 }
             }
         }
-        for(int i=0; i<=mapa.tab_br.size(); i++){
+        for(int i=0; i<mapa.tab_br.size(); i++){
             bron br = mapa.tab_br.get(i);
             if(this.czy_uzbrojony==0 && br.czy_na_ziemii && br.koordynaty.distance(this.koordynaty)<=5){
-                cel_ruchu = jaki_ruch(this.koordynaty, br.koordynaty);
+                cel_ruchu.setLocation(jaki_ruch(this.koordynaty, br.koordynaty));
                 if (czy_plot(cel_ruchu, mapa)){
                     int p = atakuj_plot(cel_ruchu, mapa);
                     if(p==2){
@@ -84,7 +84,7 @@ public class czlowiek extends src.postac {
                 }
             }
         }
-        cel_ruchu = losowy_ruch(this.koordynaty, mapa.rozmiar);
+        cel_ruchu.setLocation(losowy_ruch(this.koordynaty, mapa.rozmiar));
         if (czy_plot(cel_ruchu, mapa)){
             int p = atakuj_plot(cel_ruchu, mapa);
             if(p==2){
@@ -100,9 +100,9 @@ public class czlowiek extends src.postac {
     public int atakuj_zombie(zombie zom, mapa mapa){
         zom.zdrowie=zom.zdrowie-this.bron.obrazenia;
         this.bron.wytrzymalosc--;
-        if(this.bron.wytrzymalosc<=0){
+        if(this.bron.wytrzymalosc<=0 && this.czy_uzbrojony==1){
             mapa.tab_br.remove(this.bron);
-            this.bron=null;
+            this.czy_uzbrojony=0;
         }
         if(zom.zdrowie<=0){
             if(mapa.map[zom.koordynaty.y][zom.koordynaty.x]=='o'){
@@ -126,12 +126,15 @@ public class czlowiek extends src.postac {
         else if(mapa.map[this.koordynaty.y][this.koordynaty.x] == 'i'){
             mapa.map[this.koordynaty.y][this.koordynaty.x] = 'b';
         }
+        else if(mapa.map[this.koordynaty.y][this.koordynaty.x] == 'k'){
+            mapa.map[this.koordynaty.y][this.koordynaty.x] = 'c';
+        }
         else{
             mapa.map[this.koordynaty.y][this.koordynaty.x] = ' ';
         }
         if(mapa.map[koor.y][koor.x] == 'w'){
-            woda wod = null;
-            for(int i=0; i<=mapa.tab_w.size(); i++){
+            woda wod = new woda(koor);
+            for(int i=0; i<mapa.tab_w.size(); i++){
                 wod = mapa.tab_w.get(i);
                 if(wod.koordynaty.equals(koor)){
                     break;
@@ -139,6 +142,9 @@ public class czlowiek extends src.postac {
             }
             this.tury_spowolnienia = wod.tury_spowolnienia;
             mapa.map[koor.y][koor.x] = 'l';
+        }
+        else if(mapa.map[koor.y][koor.x] == 'c'){
+            mapa.map[koor.y][koor.x] = 'k';
         }
         else if(mapa.map[koor.y][koor.x] == 'b'){
             if(this.czy_uzbrojony==0){
@@ -155,14 +161,16 @@ public class czlowiek extends src.postac {
         else{
             mapa.map[koor.y][koor.x] = 'c';
         }
-        this.koordynaty = koor;
-        this.bron.koordynaty = koor;
+        if(this.czy_uzbrojony==1){
+            this.bron.koordynaty.setLocation(koor);
+        }
+        this.koordynaty.setLocation(koor);
     }
     private boolean czy_lepsza_bron(Point koor, mapa mapa){
         double br_1 = (this.bron.obrazenia+this.bron.zasieg+this.bron.wytrzymalosc)/3;
-        bron br = null;
+        bron br;
         double br_2 = 0;
-        for(int i=0; i<=mapa.tab_br.size(); i++){
+        for(int i=0; i<mapa.tab_br.size(); i++){
             br = mapa.tab_br.get(i);
             if(br.koordynaty.equals(koor) && br != this.bron){
                 br_2 = (br.obrazenia + br.zasieg + br.wytrzymalosc)/3;
@@ -174,7 +182,7 @@ public class czlowiek extends src.postac {
         return false;
     }
     private void zamien_bron(mapa mapa, Point koor){
-        for(int i=0; i<=mapa.tab_br.size(); i++){
+        for(int i=0; i<mapa.tab_br.size(); i++){
             bron br = mapa.tab_br.get(i);
             if(br.koordynaty.equals(koor) && br != this.bron){
                 this.bron.czy_na_ziemii=true;
@@ -184,7 +192,7 @@ public class czlowiek extends src.postac {
         }
     }
     private void wez_bron(mapa mapa, Point koor){
-        for(int i=0; i<=mapa.tab_br.size(); i++){
+        for(int i=0; i<mapa.tab_br.size(); i++){
             bron br = mapa.tab_br.get(i);
             if(br.koordynaty.equals(koor)){
                 setBron(br);
@@ -230,12 +238,14 @@ public class czlowiek extends src.postac {
         }
         else{
             this.czy_uzbrojony=0;
+            bron = new bron(koor, false, this.podstawowe_obrazenia, 21474836, 1);
         }
-        random = rand.nextInt(5);
-        this.czy_uzbrojony = random+1;
     }
 
-
+    public czlowiek(Point koordynaty, int zdrow, int dmg, int czy_uzb){
+        super(koordynaty, zdrow, dmg);
+        this.czy_uzbrojony=czy_uzb;
+    }
     public int getCzy_uzbrojony() {
         return czy_uzbrojony;
     }
@@ -252,4 +262,5 @@ public class czlowiek extends src.postac {
     public void setBron(src.bron bron) {
         this.bron = bron;
     }
+
 }

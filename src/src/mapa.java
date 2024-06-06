@@ -34,13 +34,14 @@ public class mapa {
     c - czlowiek
     p - plot
     o - zombie w wodzie
-    l - czlowiek w wodzie
+    l - czlowiek w wodzieF
     m - zombie i bron
     i - czlowiek i bron
+    e - pare zombie na jednym polu
+    k - pare ludzi na jednym polu
      */
     public void losuj_mape() {
         Point koor = new Point();
-
         for (int i = 0; i < this.rozmiar; i++) {
             for (int j = 0; j < this.rozmiar; j++) {
                 Random rand = new Random();
@@ -82,7 +83,7 @@ public class mapa {
                         czlowiek czlowiek = new czlowiek(koor);
                         if(czlowiek.getCzy_uzbrojony()==1){
                             bron bron = new bron(koor, false);
-                            czlowiek.setBron(bron);
+                            czlowiek.bron = bron;
                             tab_br.add(bron);
                         }
                         tab_cz.add(czlowiek);
@@ -102,7 +103,12 @@ public class mapa {
             }
         }
     }
-    //metoda swtorz mape dla trybu 2
+    public void stworz_mape(mapa mapa){
+        int input;
+        for(int i=0; i<getRozmiar(); i++){
+
+        }
+    }
 
 
 
@@ -123,5 +129,53 @@ public class mapa {
 
     public void setMap(char[][] map) {
         this.map = map;
+    }
+
+    public List<czlowiek> getTab_cz() {
+        return tab_cz;
+    }
+
+    public void setTab_cz(List<czlowiek> tab_cz) {
+        this.tab_cz = tab_cz;
+    }
+
+    public List<bron> getTab_br() {
+        return tab_br;
+    }
+
+    public void setTab_br(List<bron> tab_br) {
+        this.tab_br = tab_br;
+    }
+
+    public List<plot> getTab_pl() {
+        return tab_pl;
+    }
+
+    public void setTab_pl(List<plot> tab_pl) {
+        this.tab_pl = tab_pl;
+    }
+
+    public List<zombie> getTab_z() {
+        return tab_z;
+    }
+
+    public void setTab_z(List<zombie> tab_z) {
+        this.tab_z = tab_z;
+    }
+
+    public List<trawa> getTab_t() {
+        return tab_t;
+    }
+
+    public void setTab_t(List<trawa> tab_t) {
+        this.tab_t = tab_t;
+    }
+
+    public List<woda> getTab_w() {
+        return tab_w;
+    }
+
+    public void setTab_w(List<woda> tab_w) {
+        this.tab_w = tab_w;
     }
 }

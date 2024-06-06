@@ -5,7 +5,8 @@ import java.awt.*;
 public class pole {
     Point koordynaty;
     public pole(Point koor){
-        this.koordynaty=koor;
+        this.koordynaty=new Point();
+        this.koordynaty.setLocation(koor);
     }
     public Point getKoordynaty() {
         return koordynaty;

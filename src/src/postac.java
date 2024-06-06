@@ -29,10 +29,10 @@ public class postac {
         Random rand = new Random();
         int x = rand.nextInt(3)-1;
         int y = rand.nextInt(3)-1;
-        if(punkt.x+x>rozmiar_mapy || punkt.x+x<0){
+        if(punkt.x+x>=rozmiar_mapy || punkt.x+x<0){
             x=x*-1;
         }
-        if(punkt.y+y>rozmiar_mapy || punkt.y+y<0){
+        if(punkt.y+y>=rozmiar_mapy || punkt.y+y<0){
             y=y*-1;
         }
         return new Point(punkt.x+x, punkt.y+y);
@@ -62,7 +62,8 @@ public class postac {
     public postac(Point koor, int zdrow, int dmg) {
         this.zdrowie = zdrow;
         this.podstawowe_obrazenia = dmg;
-        this.koordynaty = koor;
+        this.koordynaty = new Point();
+        this.koordynaty.setLocation(koor);
         this.tury_spowolnienia=0;
     }
 
@@ -88,5 +89,13 @@ public class postac {
 
     public void setKoordynaty(Point koordynaty) {
         this.koordynaty = koordynaty;
+    }
+
+    public int getTury_spowolnienia() {
+        return tury_spowolnienia;
+    }
+
+    public void setTury_spowolnienia(int tury_spowolnienia) {
+        this.tury_spowolnienia = tury_spowolnienia;
     }
 }

@@ -17,8 +17,17 @@ public class bron {
         this.wytrzymalosc=5;
         this.zasieg=random;
         this.czy_na_ziemii = czy_ziemia;
+        this.koordynaty=new Point();
+        this.koordynaty.setLocation(koor);
     }
-
+    public bron(Point koor, boolean czy_na_ziemii, int dmg, int wytrzymalosc, int zasieg){
+        this.koordynaty=new Point();
+        this.koordynaty.setLocation(koor);
+        this.czy_na_ziemii=czy_na_ziemii;
+        this.obrazenia=dmg;
+        this.wytrzymalosc=wytrzymalosc;
+        this.zasieg=zasieg;
+    }
     public int getObrazenia() {
         return obrazenia;
     }
@@ -43,7 +52,7 @@ public class bron {
         this.zasieg = zasieg;
     }
 
-    public boolean isCzy_na_ziemii() {
+    public boolean getCzy_na_ziemii() {
         return czy_na_ziemii;
     }
 

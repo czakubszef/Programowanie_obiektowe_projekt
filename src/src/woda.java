@@ -17,4 +17,8 @@ public class woda extends src.pole {
         super(koor);
         this.tury_spowolnienia=1;
     }
+    public woda(Point koor, int ts){
+        super(koor);
+        this.tury_spowolnienia=ts;
+    }
 }

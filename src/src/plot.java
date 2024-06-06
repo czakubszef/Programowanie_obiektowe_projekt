@@ -6,8 +6,13 @@ public class plot {
     int zdrowie;
     Point koordynaty;
     public plot(Point koor){
-        this.koordynaty=koor;
+        this.koordynaty=new Point();
+        this.koordynaty.setLocation(koor);
         this.zdrowie=5;
+    }
+    public plot(Point koor, int zdr){
+        this.koordynaty=koor;
+        this.zdrowie=zdr;
     }
 
     public int getZdrowie() {
