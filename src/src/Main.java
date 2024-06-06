@@ -45,7 +45,7 @@ public class Main {
         List<Integer> z_d = new ArrayList<>();
         while(true){
             liczba_tur++;
-            cli(mapa);
+            cli(mapa, cz_d, z_d);
             cz_d.clear();
             z_d.clear();
             for(int i=0; i<mapa.tab_cz.size(); i++){
@@ -69,21 +69,22 @@ public class Main {
                 z_d.add(p);
             }
             if(mapa.tab_z.isEmpty()){
-                cli(mapa);
+                cli(mapa, cz_d, z_d);;
+                koncowa_plansza(1, mapa, liczba_tur, start_c, start_z, start_pl);
                 return;
             }
             else if(mapa.tab_cz.isEmpty()){
-                cli(mapa);
+                cli(mapa, cz_d, z_d);
+                koncowa_plansza(0, mapa, liczba_tur, start_c, start_z, start_pl);
                 return;
             }
         }
     }
     //jakas tam metoda do wyswietlania wszystkiego
-    private void cli(mapa mapa){
+    private void cli(mapa mapa, List<Integer> cz_d, List<Integer> z_d){
         wyczysc_konsole();
-        System.out.print('-');
         for(int i=0; i< mapa.rozmiar; i++){
-            System.out.print("--");
+            System.out.print("---");
         }
         System.out.print("\n");
         for(int i=0; i<mapa.rozmiar; i++) {
@@ -93,9 +94,8 @@ public class Main {
                 System.out.print('|');
             }
             System.out.print("\n");
-            System.out.print('-');
             for (int j = 0; j < mapa.rozmiar; j++) {
-                System.out.print("--");
+                System.out.print("---");
             }
             System.out.print("\n");
         }
@@ -104,7 +104,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if ("d".equalsIgnoreCase(input)) {
-            System.out.println('d');
+            dziennik_zdarzen(cz_d, z_d);
         }
     }
     private void wyczysc_konsole(){
@@ -181,7 +181,7 @@ public class Main {
         }
         System.out.print("\n\nKoncowy wyglad mapy:\n-");
         for(int i=0; i< mapa.rozmiar; i++){
-            System.out.print("--");
+            System.out.print("---");
         }
         System.out.print("\n");
         for(int i=0; i<mapa.rozmiar; i++) {
@@ -191,9 +191,8 @@ public class Main {
                 System.out.print('|');
             }
             System.out.print("\n");
-            System.out.print('-');
             for (int j = 0; j < mapa.rozmiar; j++) {
-                System.out.print("--");
+                System.out.print("---");
             }
             System.out.print("\n");
         }
