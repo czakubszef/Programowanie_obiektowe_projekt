@@ -6,6 +6,8 @@ przed zombie; pole trawy, po którym chodzą ludzie i zombie oraz pole wody, kt�
 Oracle OpenJDK version 22
 ## Jak uruchomić program
 Należy "zbuildować" projekt, a następnie uruchomić metodę main w klasie Main.
+## Diagram klas
+![Alt text](diagram_klas.jpg)
 ## Klasy
 ### Main
 **Atrybuty**
