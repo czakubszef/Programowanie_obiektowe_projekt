@@ -242,9 +242,15 @@ public class czlowiek extends src.postac {
         }
     }
 
-    public czlowiek(Point koordynaty, int zdrow, int dmg, int czy_uzb){
+    public czlowiek(Point koordynaty, int zdrow, int dmg, int czy_uzb, bron bron){
         super(koordynaty, zdrow, dmg);
         this.czy_uzbrojony=czy_uzb;
+        if(this.czy_uzbrojony == 0){
+            this.bron = new bron(koordynaty, false, this.podstawowe_obrazenia, 21474836, 1);
+        }
+        else{
+            this.bron=bron;
+        }
     }
     public int getCzy_uzbrojony() {
         return czy_uzbrojony;

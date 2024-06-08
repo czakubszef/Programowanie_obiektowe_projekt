@@ -25,7 +25,11 @@ public class Main {
                 this.symulacja(mapa);
             }
             else if(menu_number == 2){
-
+                System.out.print("Prosze wpisac rozmiar mapy symulacji: ");
+                int rozmiar = usr_input.nextInt();
+                mapa mapa = new mapa(rozmiar);
+                mapa.stworz_mape();
+                this.symulacja(mapa);
             }
             else if(menu_number == 3){
                 return;

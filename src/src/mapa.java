@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class mapa {
     int rozmiar;
@@ -103,13 +104,131 @@ public class mapa {
             }
         }
     }
-    public void stworz_mape(mapa mapa){
+    public void stworz_mape(){
         int input;
-        for(int i=0; i<getRozmiar(); i++){
-
+        Point koor = new Point();
+        int zdrowie;
+        int dmg;
+        int tury_spow;
+        int dmg_br;
+        int wytrz;
+        int zasieg;
+        int czy_uzb;
+        for(int i=0; i<this.rozmiar; i++){
+            for(int j=0; j<this.rozmiar; j++){
+                wyczysc_konsole();
+                koor.setLocation(j, i);
+                System.out.println("Kreator mapy do symulacji\nAktualny wyglad mapy:");
+                for(int k=0; k<this.rozmiar; k++) {
+                    for (int l = 0; l < this.rozmiar; l++) {
+                        System.out.print('|');
+                        System.out.print(this.map[k][l]);
+                        System.out.print('|');
+                    }
+                    System.out.print("\n");
+                    for (int l = 0; l < this.rozmiar; l++) {
+                        System.out.print("---");
+                    }
+                    System.out.print("\n");
+                }
+                System.out.println("1. Czlowiek\n2. Zombie\n3. Plot\n4. Bron lezaca na trawie\n5. Trawa\n6. Woda\nProsze wpisac nr odpowiadający obiektowi jaki chce się postawić na polu x = " + j + "y = " + i + ": ");
+                Scanner scanner = new Scanner(System.in);
+                input = scanner.nextInt();
+                switch (input){
+                    case 1:
+                       wyczysc_konsole();
+                       System.out.print("Prosze wpisac odpowiednie statystyki dla tego czlowieka:\nZdrowie: ");
+                       zdrowie = scanner.nextInt();
+                       System.out.print("Podstawowe obrazenia: ");
+                       dmg = scanner.nextInt();
+                       System.out.print("Czy ma na start bron (1 jesli tak, 0 jesli nie : ");
+                       czy_uzb = scanner.nextInt();
+                       if(czy_uzb==1){
+                           System.out.print("Prosze podac statystyki broni trzymanej przez czlowieka:\nObrazenia: ");
+                           dmg_br = scanner.nextInt();
+                           System.out.print("Wytrzymalosc: ");
+                           wytrz = scanner.nextInt();
+                           System.out.print("Zasieg: ");
+                           zasieg = scanner.nextInt();
+                           bron bron = new bron(koor ,false, dmg_br, wytrz, zasieg);
+                           czlowiek czlowiek = new czlowiek(koor, zdrowie, dmg, czy_uzb, bron);
+                           trawa trawa = new trawa(koor, 1);
+                           this.tab_t.add(trawa);
+                           this.tab_cz.add(czlowiek);
+                           this.tab_br.add(bron);
+                       }
+                       else{
+                           bron bron = new bron(koor, false);
+                           czlowiek czlowiek = new czlowiek(koor, zdrowie, dmg, 0, bron);
+                           trawa trawa = new trawa(koor, 1);
+                           this.tab_t.add(trawa);
+                           this.tab_cz.add(czlowiek);
+                       }
+                       this.map[i][j] = 'c';
+                       break;
+                    case 2:
+                        wyczysc_konsole();
+                        System.out.print("Prosze wpisac odpowiednie statystyki dla tego zombie:\nZdrowie: ");
+                        zdrowie = scanner.nextInt();
+                        System.out.print("Podstawowe obrazenia: ");
+                        dmg = scanner.nextInt();
+                        zombie zombie = new zombie(koor,zdrowie,dmg);
+                        trawa trawa1 = new trawa(koor, 2);
+                        this.map[i][j]='z';
+                        this.tab_z.add(zombie);
+                        this.tab_t.add(trawa1);
+                        break;
+                    case 3:
+                        wyczysc_konsole();
+                        System.out.print("Prosze wpisac odpowiednie statystyki dla tego plotu:\n Wytrzymalosc: ");
+                        zdrowie = scanner.nextInt();
+                        plot plot = new plot(koor, zdrowie);
+                        trawa traw2a = new trawa(koor, 4);
+                        this.map[i][j] = 'p';
+                        this.tab_t.add(traw2a);
+                        this.tab_pl.add(plot);
+                        break;
+                    case 4:
+                        wyczysc_konsole();
+                        System.out.print("Prosze wpisac odpowiednie statystyki dla tej broni:\nObrazenia: ");
+                        dmg_br = scanner.nextInt();
+                        System.out.print("Wytrzymalosc: ");
+                        wytrz = scanner.nextInt();
+                        System.out.print("Zasieg: ");
+                        zasieg = scanner.nextInt();
+                        bron bron = new bron(koor ,true, dmg_br, wytrz, zasieg);
+                        trawa trawa = new trawa(koor, 3);
+                        this.map[i][j] = 'b';
+                        this.tab_t.add(trawa);
+                        this.tab_br.add(bron);
+                        break;
+                    case 5:
+                        wyczysc_konsole();
+                        trawa trawa2 = new trawa(koor, 0);
+                        this.map[i][j] = ' ';
+                        this.tab_t.add(trawa2);
+                        break;
+                    case 6:
+                        wyczysc_konsole();
+                        System.out.print("Prosze wpisac odpowiednie statystyki dla tego pola wody:\nTury spowolnienia: ");
+                        tury_spow = scanner.nextInt();
+                        woda woda = new woda(koor, tury_spow);
+                        this.map[i][j] = 'w';
+                        this.tab_w.add(woda);
+                        break;
+                }
+            }
+        }
+        wyczysc_konsole();
+        System.out.print("Zakonczono tworzenie mapy, prosze wcisnac ENTER aby przejsc do symulacji");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
+    private void wyczysc_konsole(){
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
         }
     }
-
 
 
 
