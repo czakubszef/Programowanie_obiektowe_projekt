@@ -8,6 +8,8 @@ Oracle OpenJDK version 22
 Należy "zbuildować" projekt, a następnie uruchomić metodę main w klasie Main.
 ## Diagram klas
 ![Alt text](diagram_klas.jpg)
+## Diagram obiektów
+![Alt text](diagram_obiektow.jpg)
 ## Klasy
 ### Main
 **Atrybuty**
