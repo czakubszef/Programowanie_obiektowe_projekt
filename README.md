@@ -3,7 +3,9 @@
 Apokalipsa to program napisany w javie, który symuluje walkę o przetrwanie ludzi podczas apokalipsy zombie na mapie o podanym rozmiarze przez użytkownika. Na mapie można napotkać poza zombie i ludźmi płoty, które blokują drogę, lecz można je zniszczyć; bronie, które leżą na ziemii, ludzie mogą je podnieść i używać do obrony 
 przed zombie; pole trawy, po którym chodzą ludzie i zombie oraz pole wody, które może ich również spowolnić. Symulacja kończy się w momencie kiedy umrą wszyscy ludzie lub wszystkie zombie.
 ## Wersja javy
+Oracle OpenJDK version 22
 ## Jak uruchomić program
+Należy "zbuildować" projekt, a następnie uruchomić metodę main w klasie Main.
 ## Klasy
 ### Main
 **Atrybuty**
