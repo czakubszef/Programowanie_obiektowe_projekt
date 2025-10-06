@@ -1,7 +1,13 @@
 # Apokalipsa
 ## Co to jest?
-Apokalipsa to program napisany w javie, który symuluje walkę o przetrwanie ludzi podczas apokalipsy zombie na mapie o podanym rozmiarze przez użytkownika. Na mapie można napotkać poza zombie i ludźmi płoty, które blokują drogę, lecz można je zniszczyć; bronie, które leżą na ziemii, ludzie mogą je podnieść i używać do obrony 
-przed zombie; pole trawy, po którym chodzą ludzie i zombie oraz pole wody, które może ich również spowolnić. Symulacja kończy się w momencie kiedy umrą wszyscy ludzie lub wszystkie zombie.
+Apokalipsa to program napisany w Javie, który symuluje walkę o przetrwanie ludzi podczas apokalipsy zombie. Użytkownik określa rozmiar mapy, na której toczy się rozgrywka.
+Na mapie mogą znajdować się różne elementy:
+-ludzie i zombie, którzy poruszają się i walczą o przetrwanie,
+-płoty, które blokują drogę, ale można je zniszczyć,
+-bronie leżące na ziemi — ludzie mogą je podnieść i wykorzystać do obrony,
+-pola trawy, po których mogą swobodnie się poruszać,
+-pola wody, które spowalniają ruch zarówno ludzi, jak i zombie.
+Symulacja kończy się, gdy zginą wszyscy ludzie lub wszystkie zombie.
 ## Wersja javy
 Oracle OpenJDK version 22
 ## Jak uruchomić program
